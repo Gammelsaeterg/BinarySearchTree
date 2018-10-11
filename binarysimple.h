@@ -1,7 +1,7 @@
 #ifndef BINARYSIMPLE_H
 #define BINARYSIMPLE_H
 #include <iostream>
-#include <math.h>
+#include <cmath>
 #include <vector>
 
 //Binary tree (non-searchable)
@@ -41,7 +41,7 @@ public:
         int NodesTotal{0};
         for (binaryDepth = 1; NodesTotal < numberOfNodes; ++binaryDepth)
         {
-            NodesTotal = ((pow(2, binaryDepth)) - 1);
+            NodesTotal = static_cast<int>(((pow(2, binaryDepth)) - 1));
         }
         return (binaryDepth - 1);
     }
@@ -53,9 +53,9 @@ public:
         int NodesTotal{0};
         for (binaryDepth = 1; NodesTotal < numberOfNodes; ++binaryDepth)
         {
-            NodesTotal = ((pow(2, binaryDepth)) - 1);
+            NodesTotal = static_cast<int>(((pow(2, binaryDepth)) - 1));
         }
-        return (((pow(2, (binaryDepth - 1)))/2)-(NodesTotal - numberOfNodes));
+        return static_cast<int>((((pow(2, (binaryDepth - 1)))/2)-(NodesTotal - numberOfNodes)));
     }
 
 
@@ -65,7 +65,7 @@ public:
         int NodesTotal{0};
         for (binaryDepth = 1; NodesTotal < numberOfNodes; ++binaryDepth)
         {
-            NodesTotal = ((pow(2, binaryDepth)) - 1);
+            NodesTotal = static_cast<int>(((pow(2, binaryDepth)) - 1));
         }
         return (NodesTotal - numberOfNodes);
     }
@@ -76,7 +76,7 @@ public:
         int NodesTotal{0};
         for (binaryDepth = 1; NodesTotal < numberOfNodes; ++binaryDepth)
         {
-            NodesTotal = ((pow(2, binaryDepth)) - 1);
+            NodesTotal = static_cast<int>(((pow(2, binaryDepth)) - 1));
         }
         return NodesTotal;
     }
@@ -85,14 +85,13 @@ public:
     //Input parameter currently not implemented. Function is hard-coded
     void MakeNodes(int numberOfNodes)
     {
-        int numberOfNodesLeft = numberOfNodes;
-        int binaryDepth = calculateDepth(numberOfNodes);
-        int numberOfLeaves = calculateNumberOfLeaves(numberOfNodes);
-        int sizeOfFullTree = calculateFullSizeOfTree(numberOfNodes);
+        unsigned int numberOfNodesLeft = static_cast<unsigned int>(numberOfNodes);
+        unsigned int numberOfLeaves = static_cast<unsigned int>(calculateNumberOfLeaves(numberOfNodes));
+        unsigned int sizeOfFullTree = static_cast<unsigned int>(calculateFullSizeOfTree(numberOfNodes));
 
         std::vector<Node* > NPtr;
         NPtr.resize(sizeOfFullTree);
-        for (int i = 0; i < sizeOfFullTree; ++i)
+        for (unsigned int i = 0; i < sizeOfFullTree; ++i)
         {
             NPtr[i] = new Node();
         }
@@ -106,7 +105,7 @@ public:
             //Debug text for reference
             //cout << "\n check 1" << ",  It is: " << numberOfLeaves << ", nodes left: " << numberOfNodesLeft;
             Node* n = NPtr[numberOfNodesLeft];
-            n->data = numberOfNodesLeft;
+            n->data = static_cast<int>(numberOfNodesLeft);
             n->vsub = nullptr;
             n->hsub = nullptr;
             --numberOfNodesLeft;
@@ -120,7 +119,7 @@ public:
             //Debug text for reference
             //cout << "\n check 1" << ",  It is: " << numberOfLeaves << ", nodes left: " << numberOfNodesLeft;
             Node* n = NPtr[numberOfNodesLeft];
-            n->data = numberOfNodesLeft;
+            n->data = static_cast<int>(numberOfNodesLeft);
 
             if (NPtr[((numberOfNodesLeft*2)+1)])
             {
@@ -145,7 +144,7 @@ public:
             //Debug text for reference
             //cout << "\n check 1" << ",  It is: " << numberOfLeaves << ", nodes left: " << numberOfNodesLeft;
             Node* n = NPtr[numberOfNodesLeft];
-            n->data = numberOfNodesLeft;
+            n->data = static_cast<int>(numberOfNodesLeft);
             root = n;
 
             if (NPtr[((numberOfNodesLeft*2)+1)])
