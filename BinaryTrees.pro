@@ -5,7 +5,6 @@ CONFIG -= qt
 
 SOURCES += \
         main.cpp \
-    binarynode.cpp
 
 HEADERS += \
     binarynode.h \

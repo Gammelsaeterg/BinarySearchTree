@@ -4,6 +4,8 @@
 #include <math.h>
 #include <vector>
 
+//Binary tree (non-searchable)
+
 using namespace std;
 
 class BinaryTree
