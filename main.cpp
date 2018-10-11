@@ -6,6 +6,17 @@ using namespace std;
 
 int main()
 {
+
+    //The binary tree
+
+
+
+    cout << "Adding nodes from the bottom and upwards... \n\n";
+    BinaryTree MyBottomUpTree(10);
+
+    cout << "In-order traversal of the binary-tree: ";
+    MyBottomUpTree.PrintInOrder();
+
     //The binary search tree
 //    int input{};
 //    int TreeKeys[16] = {50, 76, 21, 4, 32, 64, 15, 52, 14, 100, 83, 2, 3, 70, 87, 80};
@@ -49,14 +60,6 @@ int main()
 //        }
 //    }
 
-
-
-    //The binary tree
-
-    cout << "Adding nodes from the bottom: \n";
-    BinaryTree MyBottomUpTree(10);
-
-    MyBottomUpTree.PrintInOrder();
 
     return 0;
 }

@@ -14,7 +14,7 @@ public:
 
     struct Node
     {
-        int data{-1};
+        int data{};
         Node* vsub;
         Node* hsub;
     };
@@ -32,7 +32,7 @@ public:
 
     ~BinaryTree()
     {
-
+        //Needs a function to delete the binary tree
     }
 
     int calculateDepth(int numberOfNodes)
@@ -47,7 +47,7 @@ public:
     }
 
 
-    int calculateNumberOfLeaves(int numberOfNodes)
+    int calculateNumberOfBottomLeaves(int numberOfNodes)
     {
         int binaryDepth{1};
         int NodesTotal{0};
@@ -86,24 +86,28 @@ public:
     void MakeNodes(int numberOfNodes)
     {
         unsigned int numberOfNodesLeft = static_cast<unsigned int>(numberOfNodes);
-        unsigned int numberOfLeaves = static_cast<unsigned int>(calculateNumberOfLeaves(numberOfNodes));
+        unsigned int numberOfLeaves = static_cast<unsigned int>(calculateNumberOfBottomLeaves(numberOfNodes));
         unsigned int sizeOfFullTree = static_cast<unsigned int>(calculateFullSizeOfTree(numberOfNodes));
 
+        //Vector of pointers
         std::vector<Node* > NPtr;
         NPtr.resize(sizeOfFullTree);
-        for (unsigned int i = 0; i < sizeOfFullTree; ++i)
-        {
-            NPtr[i] = new Node();
-        }
+
+//        for (unsigned int i = 0; i < sizeOfFullTree+1; ++i)
+//        {
+//            NPtr[i] = new Node();
+//        }
 
 //        Node**NPtr;
 //        NPtr = new Node*[numberOfNodes];
 
-        //Creates all of the bottom leaves
+        //Creates all of the bottom leaves //Warning - this code isn't necessary
         while (numberOfLeaves > 0)
         {
             //Debug text for reference
             //cout << "\n check 1" << ",  It is: " << numberOfLeaves << ", nodes left: " << numberOfNodesLeft;
+
+            NPtr[numberOfNodesLeft] = new Node();
             Node* n = NPtr[numberOfNodesLeft];
             n->data = static_cast<int>(numberOfNodesLeft);
             n->vsub = nullptr;
@@ -113,27 +117,23 @@ public:
         }
 
 
-        //Creates the rest of the leaves
+        //Creates the rest of the leaves and/or sub trees
         while (numberOfNodesLeft > 1)
         {
             //Debug text for reference
             //cout << "\n check 1" << ",  It is: " << numberOfLeaves << ", nodes left: " << numberOfNodesLeft;
+            NPtr[numberOfNodesLeft] = new Node();
             Node* n = NPtr[numberOfNodesLeft];
             n->data = static_cast<int>(numberOfNodesLeft);
 
-            if (NPtr[((numberOfNodesLeft*2)+1)])
+            if (((numberOfNodesLeft*2)+1) <= static_cast<unsigned int>(numberOfNodes))
             {
-                if (NPtr[((numberOfNodesLeft*2)+1)]->data != -1)
-                {
-                    n->hsub = NPtr[((numberOfNodesLeft*2)+1)];
-                }
-
+                    n->hsub = NPtr[((numberOfNodesLeft*2)+1)];                
             }
-            if (NPtr[(numberOfNodesLeft*2)])
+            if ((numberOfNodesLeft*2) <= static_cast<unsigned int>(numberOfNodes))
             {
-                if (NPtr[(numberOfNodesLeft*2)]->data != -1)
                 {
-                        n->vsub = NPtr[(numberOfNodesLeft*2)];
+                    n->vsub = NPtr[(numberOfNodesLeft*2)];
                 }
             }
             --numberOfNodesLeft;
@@ -143,6 +143,7 @@ public:
         {
             //Debug text for reference
             //cout << "\n check 1" << ",  It is: " << numberOfLeaves << ", nodes left: " << numberOfNodesLeft;
+            NPtr[numberOfNodesLeft] = new Node();
             Node* n = NPtr[numberOfNodesLeft];
             n->data = static_cast<int>(numberOfNodesLeft);
             root = n;
