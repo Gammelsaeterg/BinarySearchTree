@@ -1,9 +1,15 @@
+
 #ifndef BINARYNODE_H
 #define BINARYNODE_H
 #include <iostream>
 #include <math.h>
 
 using namespace std;
+
+
+//Binary search tree  /////////
+
+namespace TheBinaryTree{
 
 template <class T>
 class BinarySearchTree
@@ -17,8 +23,9 @@ private:
         Node* left;
         Node* right;
     };
-
     Node* root;
+
+    //Adds leaf
     void AddLeafPrivate(T key, Node* Ptr)
     {
         if(root == nullptr)
@@ -69,6 +76,8 @@ private:
     {
         return ReturnNodePrivate(key, root);
     }
+
+    //Prints tree from left to right, which means from lowest to highest values
     void PrintInOrderPrivate(Node* Ptr)
     {
         if(root != nullptr)
@@ -92,7 +101,7 @@ private:
         }
     }
 
-
+    //Prints in pre-order
     void PrintInPreOrderPrivate(Node* Ptr)
     {
         if(root != nullptr)
@@ -142,7 +151,7 @@ private:
         }
     }
 
-
+    //Finds smallest node by recursing to the left
     T FindSmallestPrivate(Node* Ptr)
     {
         if(root == nullptr)
@@ -163,7 +172,7 @@ private:
         }
     }
 
-
+    //Searches for node to remove
     void RemoveNodePrivate(T key, Node* parent)
     {
         if (root != nullptr)
@@ -207,14 +216,14 @@ private:
             int rootKey = root->key;
             int smallestKeyInRightSubTree;
 
-            // Case 0 - 0 children
+            // Case 0 - 0 children, deletes the leaf
             if(root->left == nullptr && root->right == nullptr)
             {
                 root = nullptr;
                 delete delPtr;
             }
 
-            // Case 1 - 1 child
+            // Case 1 - 1 child, sets the lower right or left pointer to be root, then deletes old pointer
             else if(root->left == nullptr && root->right != nullptr)
             {
                 root = root->right;
@@ -232,7 +241,8 @@ private:
                           << "The new root contains key " << root->key << std::endl;
             }
 
-            // Case 2 - 2 children
+            // Case 2 - 2 children, finds smallest node in the right subtree, replaces node to be deleted with it, and then removes
+            // the node to be deleted by recursing
             else
             {
                 smallestKeyInRightSubTree = FindSmallestPrivate(root->right);
@@ -257,7 +267,7 @@ private:
             int matchKey = match->key;
             int smallestKeyInRightSubTree;
 
-            //Case 0 - 0 Children
+            //Case 0 - 0 Children, deletes the leaf
             if(match->left == nullptr && match->right == nullptr)
             {
                 delPtr = match;
@@ -267,7 +277,7 @@ private:
                           << " was removed\n";
             }
 
-            // Case 1 - 1 child
+            // Case 1 - 1 child, sets the lower right or left pointer to replace the node that is to be deleted
             else if (match->left == nullptr && match->right != nullptr)
             {
                 left == true ? parent->left = match->right : parent = match->right;
@@ -287,7 +297,8 @@ private:
                           << " was removed\n";
             }
 
-            // Case 2 - 2 Children
+            // Case 2 - 2 Children, finds smallest node in the right subtree, replaces node to be deleted with it, and then removes
+            // the node to be deleted by recursing
             else
             {
                 smallestKeyInRightSubTree = FindSmallestPrivate(match->right);
@@ -303,7 +314,7 @@ private:
         }
     }
 
-
+    //Post-order traversing to delete the tree
     void RemoveSubtree(Node* Ptr)
     {
         if(Ptr != nullptr)
@@ -388,6 +399,6 @@ public:
     }
 
 };
-
+}
 
 #endif // BINARYNODE_H
