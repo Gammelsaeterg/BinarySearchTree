@@ -23,7 +23,6 @@ private:
         Node* left;
         Node* right;
     };
-    Node* root;
 
     //Adds leaf
     void AddLeafPrivate(T key, Node* Ptr)
@@ -334,6 +333,7 @@ private:
     }
 
 public:
+    Node* root;
 
     BinarySearchTree()
     {
@@ -398,6 +398,55 @@ public:
         RemoveNodePrivate(key, root);
     }
 
+
+    //Borrowed and edited code 2: https://stackoverflow.com/a/50650932
+    void PrintTree(Node* root)
+    {
+            if (root == nullptr)
+            {
+                    return;
+            }
+
+            cout << root->key << endl;
+            PrintSubtree(root, "");
+            cout << endl;
+    }
+
+    void PrintSubtree(Node* root, const string& prefix)
+    {
+            if (root == nullptr)
+            {
+                    return;
+            }
+
+
+            bool hasLeft = (root->left != nullptr);
+            bool hasRight = (root->right != nullptr);
+
+            if (!hasLeft && !hasRight)
+            {
+                    return;
+            }
+
+            cout << prefix;
+            cout << ((hasLeft  && hasRight) ? "├── " : "");
+            cout << ((!hasLeft && hasRight) ? "└── " : "");
+
+            if (hasRight)
+            {
+                    bool printStrand = (hasLeft && hasRight && (root->right->right != nullptr || root->right->left != nullptr));
+                    string newPrefix = prefix + (printStrand ? "│   " : "    ");
+                    cout << root->right->key << endl;
+                    PrintSubtree(root->right, newPrefix);
+            }
+
+            if (hasLeft)
+            {
+                    cout << (hasRight ? prefix : "") << "└── " << root->left->key << endl;
+                    PrintSubtree(root->left, prefix + "    ");
+            }
+    }
+    //End of borrowed code 2
 };
 }
 

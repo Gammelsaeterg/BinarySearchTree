@@ -45,18 +45,20 @@ int main()
 
 
 
-    cout << "Printing the tree in order\nBefore adding numbers\n";
+    cout << "Printing the tree in order before adding numbers:\n";
 
     MyTree.PrintInOrder();
+    cout << "\n";
 
     for(int i = 0; i < 16; i++)
     {
         MyTree.AddLeaf(TreeKeys[i]);
     }
 
-    cout << "Printing the tree in order\nAfter adding numbers\n";
-
+    cout << "Printing the tree in order after adding numbers:\n";
     MyTree.PrintInOrder();
+    cout << "\n\n";
+    MyTree.PrintTree(MyTree.root);
     cout << "Hello World!" << endl;
 
     MyTree.PrintChildren(MyTree.ReturnRootKey());
