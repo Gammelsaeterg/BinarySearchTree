@@ -70,6 +70,23 @@ private:
         return n;
     }
 
+    /** Private implementation of search
+     * @see T* search(const T &key)
+     */
+    T* searchPrivate(const T &key, Node* node) {
+        if (node == nullptr) {
+            return nullptr;
+        }
+
+        if (node->key == key) {
+            return &node->key;
+        } else if (key < node->key) {
+            return searchPrivate(key, node->left);
+        } else {
+            return searchPrivate(key, node->right);
+        }
+    }
+
 
     Node* ReturnNode(T key)
     {
@@ -386,6 +403,24 @@ public:
         {
             std::cout << "Key " << key << " is not in the tree\n";
         }
+    }
+
+    /** Searches for the node using the specified key
+     *
+     * @param key - Key of node to find.
+     * @return A pointer to the key, nullptr if not found.
+     */
+    T* search(const T &key) {
+        if (root != nullptr) {
+            if (root->key == key) {
+                return &root->key;
+            } else if (key < root->key) {
+                return searchPrivate(key, root->left);
+            } else {
+                return searchPrivate(key, root->right);
+            }
+        }
+        return nullptr;
     }
 
     T FindSmallest()
