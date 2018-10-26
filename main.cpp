@@ -66,6 +66,12 @@ int main()
 
     cout << "The smallest value in the tree is: " << MyTree.FindSmallest() << "\n";
 
+    if (MyTree.search(4) != nullptr) {
+        cout << "Found a " << *MyTree.search(4) << " in the tree!" << endl;
+    }
+
+
+    /*
     cout << "Enter a key value to delete. Enter -1 to stop the process\n";
     while(input != -1)
     {
@@ -81,7 +87,7 @@ int main()
             }
         }
     }
-
+    //*/
 
     return 0;
 }
